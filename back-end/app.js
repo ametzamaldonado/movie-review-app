@@ -1,35 +1,28 @@
+// DEPENDENCIES
 const express = require("express");
 const cors = require("cors");
+
+// CONFIGURATION
 const app = express();
 
+// MIDDLEWARE
 app.use(cors());
+app.use(express.json());
 
+// CONTROLLER
+const reviewController = require("./controllers/reviewController")
 
+// ROUTES
+app.use("/reviews", reviewController);
 
-const {
-    getMovies
-} = require('./queries/moviesQueries');
-
-
-app.get("/", async (req, res) => {
-    const allPopMovies = await getMovies();
-    if(allPopMovies){
-        res.status(200).json(allPopMovies)
-    } else {
-        res.status(500).json({ error: "server error!" })
-    }
+app.get("/", (req, res) => {
+    res.send("Hello")
 })
 
-// app.get("/search", async (req, res) => {
-//     console.log(req.query)
-//     const allPopMovies = await getMovies();
-//     if(allPopMovies){
-//         res.status(200).json(allPopMovies)
-//     } else {
-//         res.status(500).json({ error: "server error!" })
-//     }
-//     // res.send("Hello, welcome to the movie app!")
-// })
+//404 
+app.get('*', (req, res) => {
+    res.status(404).send("error was made")
+})
 
-
+// EXPORT
 module.exports = app;
