@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS reviews;
+
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     movie_id INTEGER,
@@ -7,3 +9,5 @@ CREATE TABLE reviews (
     content TEXT,
     created_at DATE
 );
+
+ 
